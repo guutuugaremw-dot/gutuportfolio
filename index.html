@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function() {
+        try {
+          var originalFetch = window.fetch ? window.fetch.bind(window) : undefined;
+          var currentFetch = originalFetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() {
+              return currentFetch;
+            },
+            set: function(newFetch) {
+              currentFetch = newFetch;
+            },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {
+          try {
+            var proto = Object.getPrototypeOf(window);
+            if (proto) {
+              var protoFetch = window.fetch ? window.fetch.bind(window) : undefined;
+              Object.defineProperty(proto, 'fetch', {
+                get: function() { return protoFetch; },
+                set: function(fn) { protoFetch = fn; },
+                configurable: true,
+                enumerable: true
+              });
+            }
+          } catch (e2) {}
+        }
+      })();
+    </script>
+    <title>Gutu — Web & Application Designer Portfolio</title>
+    <meta name="description" content="Portfolio of Gutu, Web and Application Designer. Showcasing major digital projects, interactive live web prototypes, design systems, and product engineering case studies." />
+    <meta property="og:title" content="Gutu — Web & Application Designer Portfolio" />
+    <meta property="og:description" content="Portfolio of Gutu, Web and Application Designer. Showcasing major digital projects, interactive live web prototypes, design systems, and product engineering case studies." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/assets/aistudio/Futuristic_Gutu_Web_Designer_Logo_d4ffc51c.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/png" href="/assets/aistudio/Futuristic_Gutu_Web_Designer_Logo_d4ffc51c.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-slate-950 text-slate-100 antialiased selection:bg-blue-600 selection:text-white transition-colors duration-200">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
